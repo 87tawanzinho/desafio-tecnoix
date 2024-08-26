@@ -3,12 +3,12 @@
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\ReplySupportApiController;
 use App\Http\Controllers\Api\SupportController;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/login', [AuthController::class, 'auth']);
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
-
+Route::post('/books', [BookController::class, 'store']);
+Route::get('/books',  [BookController::class, 'index']);
+Route::get('/books/{id}', [BookController::class, 'show']);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/replies/{support_id}', [ReplySupportApiController::class, 'getRepliesFromSupport']);
     Route::post('/replies/{support_id}', [ReplySupportApiController::class, 'createNewReply']);
